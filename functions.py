@@ -3,18 +3,26 @@ from art import tprint
 import cv2
 import numpy as np
 from logger import log
+import os
 
 def print_menu(img_path):
     log("Affichage du menu")
     tprint("Menu")
-    print("1. Gray")
-    print("2. Blur")
-    print("3. Dilate")
-    print("4. Rotate")
-    print("5. Resize")
+    print("1. Noir et Blanc")
+    print("2. Flou")
+    print("3. Dilatation")
+    print("4. Rotation")
+    print("5. Redimmension")
     print("6. Text")
-    print("7. Watercolor")
-    print("8. Leave\n")
+    print("7. Aquarelle")
+    print("8. Quitter\n")
+    
+def is_valid_image_path(img_path):
+    if os.path.isfile(img_path):
+        return True
+    else:
+        print("\nLe chemin d'image n'est pas valide. Veuillez entrer un chemin d'image correct.")
+        return False
 
     
 def gray_filter(img_path) :
@@ -30,7 +38,7 @@ def gray_filter(img_path) :
     new_img_path = "gray.jpeg"
     gray_img.save(new_img_path)
     
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    
 
     
     
@@ -54,7 +62,7 @@ def blur_filter(img_path, blur_choice):
     new_img_path = "blur.jpeg"
     blur_img.save(new_img_path)
     
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    print("\nFiltre Flou appliqué. Enregistré sous le nom de", new_img_path)
 
     
 
@@ -68,7 +76,7 @@ def dilate_filter(img_path):
     new_img_path = "dilate.jpeg"
     cv2.imwrite(new_img_path, dilated_image)
     
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    print("\nFiltre de Dilatation appliqué. Enregistré sous le nom de", new_img_path)
 
     
 
@@ -88,7 +96,7 @@ def rotation(img_path):
     new_img_path = "rotate.jpeg"
     img_rot.save(new_img_path)
 
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    print("\nFiltre de Rotation appliqué. Enregistré sous le nom de", new_img_path)
 
 
 
@@ -103,12 +111,12 @@ def resize_image(img_path):
     while True:
         try:
             # Demander à l'utilisateur la nouvelle largeur et hauteur
-            new_width = int(input("Entrer la nouvelle largeur : "))
+            new_width = int(input("\nEntrer la nouvelle largeur : "))
             new_height = int(input("Entrer la nouvelle hauteur : "))
 
             # Vérifier si les dimensions sont positives
             if new_width <= 0 or new_height <= 0:
-                raise ValueError("Les dimensions doivent être des valeurs positives.")
+                raise ValueError("\nLes dimensions doivent être des valeurs positives.")
 
             # Redimensionner l'image avec les nouvelles dimensions
             resized_img = image.resize((new_width, new_height))
@@ -122,10 +130,10 @@ def resize_image(img_path):
 
         # Capturer une exception en cas d'erreur de conversion des dimensions en entiers
         except ValueError as e:
-            print(f"Erreur : {e}")
+            print(f"\nErreur : {e}")
             print("Dimensions impossibles. Veuillez recommencer.")
             
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    print("\nFiltre de Redimmension appliqué. Enregistré sous le nom de", new_img_path)
 
             
 
@@ -153,7 +161,7 @@ def message(img_path):
     new_img_path = "message.jpeg"
     cv2.imwrite(new_img_path, written)
     
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    print("\nFiltre de Text appliqué. Enregistré sous le nom de", new_img_path)
 
     
     
@@ -178,5 +186,4 @@ def watercolor_filter(img_path):
     new_img_path = "aquarelle.jpeg"
     cv2.imwrite(new_img_path, watercolor_img)
 
-    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
-
+    print("\nFiltre Aquarelle appliqué. Enregistré sous le nom de", new_img_path)

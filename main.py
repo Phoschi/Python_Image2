@@ -1,10 +1,17 @@
 from functions import *
 from logger import log
+import os 
 
+
+
+    
 while True:
     print("")
-    img_path = input("Entrez le chemin de l'image que vous souhaitez modifier : ")
+    img_path = input("\n\nEntrez le chemin de l'image que vous souhaitez modifier : ")
 
+    while not is_valid_image_path(img_path):
+        img_path = input("\n\nEntrez le chemin de l'image que vous souhaitez modifier : ")
+    
     print_menu(img_path)
 
     choice = input("Entrez le numéro de votre choix : ")
@@ -13,13 +20,12 @@ while True:
         gray_filter(img_path)
         
     elif choice == "2":
-        while True:
+        
             blur_choice = input("\nQuelle puissance de floutage voulez-vous ?\n"
                                 "1. floutage faible\n"
                                 "2. floutage moyen\n"
                                 "3. floutage fort\n"
                                 "4. floutage très fort\n"
-                                "5. Revenir au menu principal\n\n"
                                 "Entrez le numéro de votre choix : ")
 
             if blur_choice == "1":
