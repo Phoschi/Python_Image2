@@ -46,8 +46,11 @@ while True:
         
     elif choice == "6":
         message(img_path)
-
+        
     elif choice == "7":
+        watercolor_filter(img_path)
+
+    elif choice == "8":
         print("\nAu revoir!")
         break
     

@@ -13,7 +13,8 @@ def print_menu(img_path):
     print("4. Rotate")
     print("5. Resize")
     print("6. Text")
-    print("7. Leave\n")
+    print("7. Watercolor")
+    print("8. Leave\n")
 
     
 def gray_filter(img_path) :
@@ -28,6 +29,9 @@ def gray_filter(img_path) :
     # Enregistrement de l'image 
     new_img_path = "gray.jpeg"
     gray_img.save(new_img_path)
+    
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+
     
     
 def blur_filter(img_path, blur_choice):
@@ -50,6 +54,9 @@ def blur_filter(img_path, blur_choice):
     new_img_path = "blur.jpeg"
     blur_img.save(new_img_path)
     
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+
+    
 
 def dilate_filter(img_path):
     log("Filtrage par dilation")
@@ -57,7 +64,12 @@ def dilate_filter(img_path):
     image = cv2.imread(img_path)
     kernel = np.ones((5, 5), np.uint8) 
     dilated_image = cv2.dilate(image, kernel, iterations=1)
-    cv2.imwrite("dilate.jpeg", dilated_image)
+    
+    new_img_path = "dilate.jpeg"
+    cv2.imwrite(new_img_path, dilated_image)
+    
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+
     
 
 def rotation(img_path):
@@ -75,6 +87,8 @@ def rotation(img_path):
     # Enregistrement de l'image
     new_img_path = "rotate.jpeg"
     img_rot.save(new_img_path)
+
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
 
 
 
@@ -111,6 +125,9 @@ def resize_image(img_path):
             print(f"Erreur : {e}")
             print("Dimensions impossibles. Veuillez recommencer.")
             
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+
+            
 
 def message(img_path):
     log("Ajout d'un message sur l'image")
@@ -135,3 +152,31 @@ def message(img_path):
     # Lecture du champ personnalisé + enregistrement de l'image
     new_img_path = "message.jpeg"
     cv2.imwrite(new_img_path, written)
+    
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+
+    
+    
+import cv2
+import numpy as np
+
+def watercolor_filter(img_path):
+    log("Filtre aquarelle appliqu")
+
+    image = cv2.imread(img_path)
+
+    # Convertir l'image en format flottant
+    float_img = np.float32(image)
+
+    # Appliquer un filtre bilatéral pour simuler un effet aquarelle
+    watercolor_img = cv2.bilateralFilter(float_img, 9, 75, 75)
+
+    # Convertir le résultat en format 8 bits
+    watercolor_img = np.uint8(watercolor_img)
+
+    # Enregistrer la nouvelle image
+    new_img_path = "aquarelle.jpeg"
+    cv2.imwrite(new_img_path, watercolor_img)
+
+    print("\nFiltre aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+
