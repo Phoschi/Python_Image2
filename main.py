@@ -33,8 +33,11 @@ while True:
                 break
             else:
                 print("Choix invalide. Veuillez entrer une option valide.")
-
+                
     elif choice == "3":
+        dilate_filter(img_path)
+
+    elif choice == "4":
         print("\nAu revoir!")
         break
     
