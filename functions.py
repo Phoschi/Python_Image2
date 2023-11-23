@@ -2,8 +2,10 @@ from PIL import Image, ImageFilter
 from art import tprint
 import cv2
 import numpy as np
+from logger import log
 
 def print_menu(img_path):
+    log("Affichage du menu")
     tprint("Menu")
     print("1. Gray")
     print("2. Blur")
@@ -15,6 +17,8 @@ def print_menu(img_path):
 
     
 def gray_filter(img_path) :
+    log("Filtrage en noir et blanc")
+    
     # Importer l'image à convertir
     image = Image.open(img_path)
 
@@ -27,7 +31,7 @@ def gray_filter(img_path) :
     
     
 def blur_filter(img_path, blur_choice):
-    
+    log("Filtrage en flou")
     image = Image.open(img_path)
 
     # Conversion image en flou
@@ -48,6 +52,7 @@ def blur_filter(img_path, blur_choice):
     
 
 def dilate_filter(img_path):
+    log("Filtrage par dilation")
     
     image = cv2.imread(img_path)
     kernel = np.ones((5, 5), np.uint8) 
@@ -56,8 +61,9 @@ def dilate_filter(img_path):
     
 
 def rotation(img_path):
-    # Importer l'image à convertir
+    log("Rotation de l'image")
     
+    # Importer l'image à convertir
     image = Image.open(img_path)
 
     # Demande à l'utilisateur du choix de l'angle de rotation
@@ -74,6 +80,8 @@ def rotation(img_path):
 
 # Cette fonction redimensionne une image et la sauvegarde avec de nouvelles dimensions.
 def resize_image(img_path):
+    log("Redimmension de l'image")
+    
     # Chemin de l'image à redimensionner
     image = Image.open(img_path)
 
@@ -105,8 +113,9 @@ def resize_image(img_path):
             
 
 def message(img_path):
-    # Importer l'image à convertir
+    log("Ajout d'un message sur l'image")
     
+    # Importer l'image à convertir
     image = cv2.imread(img_path, 1)
 
     # Demande à l'utilisateur du champ personnalisé
