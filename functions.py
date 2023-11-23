@@ -1,9 +1,10 @@
-from PIL import Image, ImageFilter 
+from PIL import Image, ImageFilter
 from art import tprint
 import cv2
 import numpy as np
 from logger import log
 import os
+
 
 def print_menu(img_path):
     log("Affichage du menu")
@@ -15,7 +16,8 @@ def print_menu(img_path):
     print("5. Redimmension")
     print("6. Text")
     print("7. Aquarelle")
-    print("8. Quitter\n")
+    print("8. Créer un GIF")
+    print("9. Quitter\n")
     
 def is_valid_image_path(img_path):
     if os.path.isfile(img_path):
@@ -187,3 +189,26 @@ def watercolor_filter(img_path):
     cv2.imwrite(new_img_path, watercolor_img)
 
     print("\nFiltre Aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+    
+    
+    
+# Fonction pour créer un fichier GIF à partir d'une liste d'images
+def create_gif(images, output_path):
+    # Enregistre un message de journalisation indiquant le début de la création du GIF
+    log("Création d'un GIF")
+    
+    # Vérifie si l'extension du fichier de sortie n'est pas .gif
+    if not output_path.lower().endswith('.gif'):
+        output_path += '.gif'
+
+    # Sauvegarde le GIF en utilisant la première image comme référence
+    images[0].save(
+        output_path,          # Chemin complet du fichier de sortie (GIF)
+        save_all=True,        # Indique de sauvegarder toutes les images dans la liste
+        append_images=images[1:],  # Liste des images à ajouter au GIF après la première
+        duration=500,         # Durée d'affichage de chaque image en millisecondes
+        loop=0                # Indique que le GIF doit boucler indéfiniment
+    )
+    
+    # Affiche un message indiquant que le GIF a été créé avec succès et enregistré sous le nom spécifié
+    print(f"\nGIF créé avec succès. Enregistré sous le nom de {output_path}")
