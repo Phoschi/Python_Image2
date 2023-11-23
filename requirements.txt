@@ -1,1 +1,53 @@
 art==4.9
+
+### Instructions
+
+# Bibliothèque utilisé pour notre programme :
+
+Pillow==8.2.0
+opencv-python==4.5.1
+numpy==1.20.3
+art==5.2
+
+Méthode pour rendre possible le lancement du programme : 
+
+##1. Mettre une machine virtuel :
+
+- Méthode pour instaler une machine virtuel :
+
+# Assurez-vous d'être dans le répertoire de votre projet
+cd chemin/vers/votre/projet
+
+# Créer un environnement virtuel
+python -m venv venv
+
+# Activer l'environnement virtuel
+# Sur Windows
+venv\Scripts\activate
+# Sur Linux/Mac
+source venv/bin/activate
+
+
+## 2. rentrer une a une les commandes ci-dessous :
+
+pip install Pillow==8.3.2
+pip install opencv-python==4.5.3
+pip install numpy==1.21.2
+pip install art==5.2
+
+## 3. Vérifier si les bibliothèque se sont bien instalé les commandes ci-dessous :
+
+pip show Pillow
+pip show opencv-python
+pip show numpy
+pip show art
+
+
+#Explications
+
+- Pillow est la bibliothèque Python utilisée pour manipuler les images.
+- opencv-python est utilisé pour les opérations de traitement des images.
+- numpy est utilisé pour travailler avec des tableaux et des matrices ce qui est nécessaire pour certaines opérations de OpenCV.
+- art est utilisé pour afficher le texte stylisé dans le menu.
+- Une machine virtuelle est une émulation logicielle pour un ordinateur physique, permettant une exécution d'un système d'exploitation et 
+d'applications indépendamment de l'environnement matériel sous-jacent.
