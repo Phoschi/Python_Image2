@@ -39,8 +39,11 @@ while True:
     
     elif choice =="4" :
         rotation(img_path)
-
+        
     elif choice == "5":
+        resize_image(img_path)
+
+    elif choice == "6":
         print("\nAu revoir!")
         break
     

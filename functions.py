@@ -9,7 +9,8 @@ def print_menu(img_path):
     print("2. Blur")
     print("3. Dilate")
     print("4. Rotate")
-    print("5. Leave\n")
+    print("5. Resize")
+    print("6. Leave\n")
 
     
 def gray_filter(img_path) :
@@ -67,4 +68,37 @@ def rotation(img_path):
     # Enregistrement de l'image
     new_img_path = "rotate.jpeg"
     img_rot.save(new_img_path)
-    
+
+
+
+# Cette fonction redimensionne une image et la sauvegarde avec de nouvelles dimensions.
+def resize_image(img_path):
+    # Chemin de l'image à redimensionner
+    image = Image.open(img_path)
+
+    # Utilisation d'une boucle pour garantir que les dimensions entrées sont valides
+    while True:
+        try:
+            # Demander à l'utilisateur la nouvelle largeur et hauteur
+            new_width = int(input("Entrer la nouvelle largeur : "))
+            new_height = int(input("Entrer la nouvelle hauteur : "))
+
+            # Vérifier si les dimensions sont positives
+            if new_width <= 0 or new_height <= 0:
+                raise ValueError("Les dimensions doivent être des valeurs positives.")
+
+            # Redimensionner l'image avec les nouvelles dimensions
+            resized_img = image.resize((new_width, new_height))
+
+            # Enregistrer la nouvelle image avec un nouveau chemin
+            new_img_path = " resized.jpeg"
+            resized_img.save(new_img_path)
+
+            # Sortir de la boucle si les dimensions sont valides
+            break
+
+        # Capturer une exception en cas d'erreur de conversion des dimensions en entiers
+        except ValueError as e:
+            print(f"Erreur : {e}")
+            print("Dimensions impossibles. Veuillez recommencer.")
+            
