@@ -8,7 +8,8 @@ def print_menu(img_path):
     print("1. Gray")
     print("2. Blur")
     print("3. Dilate")
-    print("4. Leave\n")
+    print("4. Rotate")
+    print("5. Leave\n")
 
     
 def gray_filter(img_path) :
@@ -52,4 +53,18 @@ def dilate_filter(img_path):
     cv2.imwrite("dilate.jpeg", dilated_image)
     
 
+def rotation(img_path):
+    # Importer l'image à convertir
+    
+    image = Image.open(img_path)
+
+    # Demande à l'utilisateur du choix de l'angle de rotation
+    value = int(input("Entrez un angle de rotation : "))
+
+    # Insertion de la valeur de l'utilisateur en paramètre de la fonction de rotation "rotate()"
+    img_rot = image.rotate(value, expand=True)
+
+    # Enregistrement de l'image
+    new_img_path = "rotate.jpeg"
+    img_rot.save(new_img_path)
     

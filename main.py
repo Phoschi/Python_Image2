@@ -36,8 +36,11 @@ while True:
                 
     elif choice == "3":
         dilate_filter(img_path)
+    
+    elif choice =="4" :
+        rotation(img_path)
 
-    elif choice == "4":
+    elif choice == "5":
         print("\nAu revoir!")
         break
     
