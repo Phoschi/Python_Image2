@@ -10,8 +10,31 @@ while True:
 
     if choice == "1":
         gray_filter(img_path)
-
+        
     elif choice == "2":
+        while True:
+            blur_choice = input("\nQuelle puissance de floutage voulez-vous ?\n"
+                                "1. floutage faible\n"
+                                "2. floutage moyen\n"
+                                "3. floutage fort\n"
+                                "4. floutage très fort\n"
+                                "5. Revenir au menu principal\n\n"
+                                "Entrez le numéro de votre choix : ")
+
+            if blur_choice == "1":
+                blur_filter(img_path, 1)
+            elif blur_choice == "2":
+                blur_filter(img_path, 2)
+            elif blur_choice == "3":
+                blur_filter(img_path, 3)
+            elif blur_choice == "4":
+                blur_filter(img_path, 4)
+            elif blur_choice == "5":
+                break
+            else:
+                print("Choix invalide. Veuillez entrer une option valide.")
+
+    elif choice == "3":
         print("\nAu revoir!")
         break
     
