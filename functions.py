@@ -10,7 +10,8 @@ def print_menu(img_path):
     print("3. Dilate")
     print("4. Rotate")
     print("5. Resize")
-    print("6. Leave\n")
+    print("6. Text")
+    print("7. Leave\n")
 
     
 def gray_filter(img_path) :
@@ -102,3 +103,26 @@ def resize_image(img_path):
             print(f"Erreur : {e}")
             print("Dimensions impossibles. Veuillez recommencer.")
             
+
+def message(img_path):
+    # Importer l'image à convertir
+    
+    image = cv2.imread(img_path, 1)
+
+    # Demande à l'utilisateur du champ personnalisé
+    user_text = input("Tapez le texte à afficher sur l'image : ")
+
+    # Affichage du champ personnalisé sur l'image
+    written = cv2.putText(
+        img = image,
+        text = user_text,
+        org = (50, 50),
+        fontFace = cv2.FONT_HERSHEY_DUPLEX,
+        fontScale = 3.0,
+        color = (255, 0, 0),
+        thickness = 3
+    )
+
+    # Lecture du champ personnalisé + enregistrement de l'image
+    new_img_path = "message.jpeg"
+    cv2.imwrite(new_img_path, written)

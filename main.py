@@ -42,8 +42,11 @@ while True:
         
     elif choice == "5":
         resize_image(img_path)
-
+        
     elif choice == "6":
+        message(img_path)
+
+    elif choice == "7":
         print("\nAu revoir!")
         break
     
