@@ -60,18 +60,32 @@ def print_second_menu():
 
 
 
+
+
+
+
+
+
 def gray_filter(image, save_result=True):
     log("Conversion en Noir et Blanc")
 
-    # Convertir l'image en noir et blanc
-    gray_img = ImageOps.grayscale(image)
+    gray_img = image.convert("L")
 
     if save_result:
-        new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/gray.jpg"
+        new_img_path = "/Users/coding/Python_Image2/Images_finales/gray.jpg"
+        new_img_name = "gray.jpg"
+        
         gray_img.save(new_img_path)
-        print("\nConversion en Noir et Blanc appliquée. Enregistré sous le nom de", new_img_path)
+
+        # Affiche un message indiquant que la conversion a été appliquée et où le nouveau fichier est enregistré
+        print("\nConversion en Noir et Blanc appliquée.\n\nEnregistré sous le nom de : ", new_img_name, "\nSon chemin est :", new_img_path)
     else:
+        # Si save_result est False, la fonction retourne simplement l'image en noir et blanc sans l'enregistrer
         return gray_img
+
+
+
+
 
 
 
@@ -83,32 +97,42 @@ def gray_filter(image, save_result=True):
 
 def blur_filter(img, blur_choice, save_result=True):
     while True:
-        log("Filtrage en flou")
+        try:
 
-        # Conversion image en flou
-        if blur_choice == 1:
-            blur_img = img.filter(ImageFilter.BoxBlur(2))
-        elif blur_choice == 2:
-            blur_img = img.filter(ImageFilter.BoxBlur(5))
-        elif blur_choice == 3:
-            blur_img = img.filter(ImageFilter.BoxBlur(8))
-        elif blur_choice == 4:
-            blur_img = img.filter(ImageFilter.BoxBlur(10))
-        else:
-            print("\nChoix invalide. Veuillez entrer une option valide.")
-            blur_choice = int(input("\nChoisissez à nouveau l'option (1-4) ou 0 pour annuler : "))
             if blur_choice == 0:
                 print("\nOpération annulée.")
                 return
+            elif 1 <= blur_choice <= 4:
+                break
+            else:
+                print("\nChoix invalide. Veuillez entrer une option valide.")
+        except ValueError:
+            print("\nEntrée invalide. Veuillez entrer un nombre entier.")
+    
+    log("Filtrage en flou")
 
-            continue
+    # Conversion image en flou
+    if blur_choice == 1:
+        blur_img = img.filter(ImageFilter.BoxBlur(2))
+    elif blur_choice == 2:
+        blur_img = img.filter(ImageFilter.BoxBlur(5))
+    elif blur_choice == 3:
+        blur_img = img.filter(ImageFilter.BoxBlur(8))
+    elif blur_choice == 4:
+        blur_img = img.filter(ImageFilter.BoxBlur(10))
 
-        if save_result:
-            new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/blur.jpeg"
-            blur_img.save(new_img_path)
-            print("\nFiltre Flou appliqué. Enregistré sous le nom de", new_img_path)
-        else:
-            return blur_img
+    if save_result:
+        new_img_path = "/Users/coding/Python_Image2/Images_finales/blur.jpeg"
+        new_img_name = "blur.jpg"
+        blur_img.save(new_img_path)
+        print("\nFiltre Flou appliqué.\n\nEnregistré sous le nom de : " , new_img_name, "\nSon chemin est : ", new_img_path)
+    else:
+        return blur_img
+
+
+
+
+
 
 
 
@@ -126,11 +150,16 @@ def dilate_filter(img, save_result=True):
     dilated_image = cv2.dilate(image_array, kernel, iterations=1)
 
     if save_result:
-        new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/dilate.jpeg"
+        new_img_path = "/Users/coding/Python_Image2/Images_finales/dilate.jpeg"
+        new_img_name ="dilate.jpg"
         cv2.imwrite(new_img_path, dilated_image)
-        print("\nFiltre de Dilatation appliqué. Enregistré sous le nom de", new_img_path)
+        print("\nFiltre de Dilatation appliqué.\n\nEnregistré sous le nom de : ",new_img_name, "\nSon chemin est :", new_img_path)
     else:
         return Image.fromarray(dilated_image)
+
+
+
+
 
 
 
@@ -147,9 +176,10 @@ def rotation(img, save_result=True):
     img_rot = img.rotate(value, expand=True)
 
     if save_result:
-        new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/rotate.jpeg"
+        new_img_path = "/Users/coding/Python_Image2/Images_finales/rotate.jpg"
+        new_img_name = "rotate.jpg"
         img_rot.save(new_img_path)
-        print("\nFiltre de Rotation appliqué. Enregistré sous le nom de", new_img_path)
+        print("\nFiltre de Rotation appliqué.\n\nEnregistré sous le nom de : ",new_img_name, "\nSon chemin est :", new_img_path)
     else:
         return img_rot
     
@@ -182,9 +212,10 @@ def resize_image(img, save_result=True):
 
             if save_result:
                 # Enregistrer la nouvelle image avec un nouveau chemin
-                new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/resized.jpeg"
+                new_img_path = "/Users/coding/Python_Image2/Images_finales/resized.jpg"
+                new_img_name = "resized.jpg"
                 resized_img.save(new_img_path)
-                print("\nFiltre de Redimension appliqué. Enregistré sous le nom de", new_img_path)
+                print("\nFiltre de Redimension appliqué.\n\nEnregistré sous le nom de : ",new_img_name, "\nSon chemin est :", new_img_path)
 
             # Sortir de la boucle si les dimensions sont valides
             break
@@ -235,9 +266,10 @@ def message(img, save_result=True):
 
     if save_result:
         # Enregistrement de l'image avec le texte personnalisé
-        new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/message.jpeg"
+        new_img_path = "/Users/coding/Python_Image2/Images_finales/message.jpg"
+        new_img_name = "message.jpg"
         cv2.imwrite(new_img_path, written)
-        print("\nFiltre de Texte appliqué. Enregistré sous le nom de", new_img_path)
+        print("\nFiltre de Texte appliqué.\n\nEnregistré sous le nom de : ",new_img_name, "\nSon chemin est :", new_img_path)
     else:
         return Image.fromarray(written)
     
@@ -261,51 +293,76 @@ def watercolor_filter(img, save_result=True):
 
     if save_result:
         # Enregistrer la nouvelle image
-        new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/aquarelle.jpeg"
+        new_img_path = "/Users/coding/Python_Image2/Images_finales/watercolor.jpg"
+        new_img_name = "watercolor.jpg"
         cv2.imwrite(new_img_path, watercolor_img)
-        print("\nFiltre Aquarelle appliqué. Enregistré sous le nom de", new_img_path)
+        print("\nFiltre Aquarelle appliqué.\n\nEnregistré sous le nom de : ",new_img_name, "\nSon chemin est :", new_img_path)
     else:
         return Image.fromarray(watercolor_img)
 
 
 
 
+
+
+
+
+
 def all_filters(image):
-    
+    # Filtre Noir et Blanc
+    gray_choice = input("\nVoulez-vous appliquer le filtre Noir et Blanc (oui / non) : ").lower()
+    if gray_choice == 'oui':
+        image = gray_filter(image, save_result=False)
+        print("Filtre Noir et Blanc appliqué")
 
-    # Appliquer le filtre Noir et Blanc
-    img = gray_filter(image, save_result=False)
+    # Filtre Flou
+    blur_choice_menu = input("\nVoulez-vous appliquer le filtre Flou (oui / non) : ").lower()
+    if blur_choice_menu == 'oui':
+        blur_choice = int(input("\nQuelle puissance de floutage voulez-vous ?\n"
+                                "1. floutage faible\n"
+                                "2. floutage moyen\n"
+                                "3. floutage fort\n"
+                                "4. floutage très fort\n"
+                                "\nEntrez le numéro de votre choix : "))
+        image = blur_filter(image, blur_choice, save_result=False)
+        print("Filtre Flou appliqué")
 
-    # Demander à l'utilisateur la puissance du flou
-    blur_choice = int(input("\nQuelle puissance de floutage voulez-vous ?\n"
-                            "1. floutage faible\n"
-                            "2. floutage moyen\n"
-                            "3. floutage fort\n"
-                            "4. floutage très fort\n"
-                            "\nEntrez le numéro de votre choix : "))
+    # Filtre Dilatation
+    dilate_choice = input("\nVoulez-vous appliquer le filtre Dilatation (oui / non) : ").lower()
+    if dilate_choice == 'oui':
+        image = dilate_filter(image, save_result=False)
+        print("Filtre Dilatation appliqué")
 
-    # Appliquer le filtre Flou
-    img = blur_filter(img, blur_choice, save_result=False)
+    # Filtre Rotation
+    rotation_choice = input("\nVoulez-vous appliquer le filtre Rotation (oui / non) : ").lower()
+    if rotation_choice == 'oui':
+        image = rotation(image, save_result=False)
+        print("Filtre Rotation appliqué")
 
-    # Appliquer le filtre de Dilatation
-    img = dilate_filter(img, save_result=False)
+    # Filtre Redimensionnement
+    resize_choice = input("\nVoulez-vous appliquer le filtre Redimensionnement (oui / non) : ").lower()
+    if resize_choice == 'oui':
+        image = resize_image(image, save_result=False)
+        print("Filtre Redimmension appliqué")
 
-    # Appliquer le filtre de Rotation
-    img = rotation(img, save_result=False)
+    # Filtre Texte
+    message_choice = input("\nVoulez-vous appliquer le filtre Texte (oui / non) : ").lower()
+    if message_choice == 'oui':
+        image = message(image, save_result=False)
+        print("Filtre Texte appliqué")
 
-    # Appliquer le filtre de Redimensionnement
-    img = resize_image(img, save_result=False)
-
-    # Appliquer le filtre de Texte
-    img = message(img, save_result=False)
-
-    # Appliquer le filtre Aquarelle
-    img = watercolor_filter(img, save_result=False)
+    # Filtre Aquarelle
+    watercolor_choice = input("\nVoulez-vous appliquer le filtre Aquarelle (oui / non) : ").lower()
+    if watercolor_choice == 'oui':
+        image = watercolor_filter(image, save_result=False)
+        print("Filtre Aquarelle appliqué")
 
     # Enregistrer l'image après avoir appliqué tous les filtres
-    new_img_path = "/Users/iblms/Documents/Python_Image2/Images_finales/tous_les_filtre.jpeg"
-    img.save(new_img_path)
-    print("\nTous les filtres ont été appliqués avec succès. Enregistré sous le nom de", new_img_path)
+    new_img_path = "/Users/coding/Python_Image2/Images_finales/tous_les_filtre.jpg"
+    new_img_name = "tous_les_filtres.jpg"
+    image.save(new_img_path)
+    print("\nTous les filtres ont été appliqués avec succès.\n\nEnregistré sous le nom de : ", new_img_name,
+          "\nSon chemin est :", new_img_path)
 
 
 

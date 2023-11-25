@@ -2,6 +2,10 @@ from functions import *
 from logger import log
 import os 
 
+print("\nLa CLI doit être rédigé sous la forme suivante :\n\nfileText.py --filters “filter_name&filter_name:filter_value” --i img_source_folder --o img_destination_folder/\n\nVoici la liste des fonctions que vous pouvez utiliser :\n\ngray_filter : appliquer un filtre noir et blanc \nblur_filter : appliquer un effet de flou \ndilate_filter : permet de dilater l'image \nrotation : appliquer une rotation selon le degré souhaité \nrezise_image : permet de redimentionner l'image \nmessage : afficher un message sur l'image \nwatercolor_filter : appliquer un filtre aquarelle \ncreate_gif : transformer l'image en GIF")
+
+    
+
 if __name__ == "__main__":
     while True:
         print("")
@@ -59,3 +63,5 @@ if __name__ == "__main__":
 
         else:
             print("\nChoix invalide. Veuillez entrer une option valide.")
+            
+            
